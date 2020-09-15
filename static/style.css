@@ -172,3 +172,8 @@ div.harvest-history {
     margin: 30px 0;
     color: #666;
 }
+
+.detail_img {
+    max-width: 90%;
+    margin: auto;
+}

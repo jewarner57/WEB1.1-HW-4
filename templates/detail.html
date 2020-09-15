@@ -12,60 +12,61 @@
 #}
 
 <main>
-        <h1>Tomato</h1>
+    <h1>{{plant.name}}</h1>
 
-        <img src="https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/tomatoes_helios4eos_gettyimages-edit.jpeg?itok=4KrW14a4">
+    <img src="{{plant.photo_url}}" class="detail_img">
 
-        
 
-        <section id="info">
-            <h3>Info</h3>
 
-            <strong>Date Planted</strong>
-            3/20/2020
-            <br><br>
+    <section id="info">
+        <h3>Info</h3>
 
-            <strong>Variety</strong>
-            Early Girl
-            <br><br>
+        <strong>Date Planted</strong>
+        {{plant.date_planted}}
+        <br><br>
 
-            <a class="nav" href="/edit/123456">Edit Plant</a><br><br>
-        </section>
+        <strong>Variety</strong>
+        {{plant.variety}}
+        <br><br>
 
-        <form action="/harvest/123456" method="POST">
-            <fieldset>
-                <legend>Harvested:</legend>
-                
-                <label>
-                    Amount harvested
-                    <input type="text" name="harvested_amount" placeholder="e.g. 2 tomatoes">
-                </label>
+        <a class="nav" href="/edit/{{plant._id}}">Edit Plant</a><br><br>
+    </section>
 
-                <label>
-                    Date harvested
-                    <input type="date" name="date_planted">
-                </label>
+    <form action="/harvest/{{plant._id}}" method="POST">
+        <fieldset>
+            <legend>Harvested:</legend>
 
-                <input type="submit" class="submit" value="Harvest!">
-            </fieldset>
-        </form>
+            <label>
+                Amount harvested
+                <input type="text" name="harvested_amount" placeholder="e.g. 2 tomatoes">
+            </label>
 
-        {#
+            <label>
+                Date harvested
+                <input type="date" name="date_planted">
+            </label>
+
+            <input type="submit" class="submit" value="Harvest!">
+        </fieldset>
+    </form>
+
+    {#
             TODO: Create a for loop here to loop over all harvests (passed in 
             from the route's context) and display their information.
         #}
-        <section id="harvest-history">
-            <h3>Harvest History</h3>
+    <section id="harvest-history">
+        <h3>Harvest History</h3>
 
-            <ul>
-                <li>5/15/2020: Harvested 3 tomatoes</li>
-                <li>5/18/2020: Harvested 2 tomatoes</li>
-            </ul>
-        </section>
+        <ul>
+            {% for harvest in harvests %}
+            <li>{{harvest.date}} Harvested {{harvest.quantity}}</li>
+            {% endfor %}
+        </ul>
+    </section>
 
-        <form action="/delete/123456" method='POST' id="delete-form" onsubmit="return confirm_delete()">
-            <input type="submit" class="nav" onclick="delete_modal()" value="Delete Plant">
-        </form>
+    <form action="/delete/{{plant._id}}" method='POST' id="delete-form" onsubmit="return confirm_delete()">
+        <input type="submit" class="nav" onclick="delete_modal()" value="Delete Plant">
+    </form>
 </main>
 
 {% endblock content %}
