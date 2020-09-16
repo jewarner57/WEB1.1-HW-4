@@ -177,3 +177,7 @@ div.harvest-history {
     max-width: 90%;
     margin: auto;
 }
+
+.error_page {
+    text-align: center;
+}

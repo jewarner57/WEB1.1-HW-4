@@ -12,6 +12,17 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/plantsDatabase"
 mongo = PyMongo(app)
 
 ############################################################
+# ERROR
+############################################################
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # display a 404 response page
+    return render_template('404.html'), 404
+
+
+############################################################
 # ROUTES
 ############################################################
 
